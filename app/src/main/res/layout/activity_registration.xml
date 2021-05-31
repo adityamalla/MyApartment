@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#f7f7f7"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/personName"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/roundede_edittext"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/common_border_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/personPhone"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Phone"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:inputType="phone"
+        android:textColorHint="@color/common_border_color"
+        android:background="@drawable/roundede_edittext"
+        app:layout_constraintEnd_toEndOf="@+id/personName"
+        app:layout_constraintStart_toStartOf="@+id/personName"
+        app:layout_constraintTop_toBottomOf="@+id/personName" />
+
+    <EditText
+        android:id="@+id/personFlat"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Flat No"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/common_border_color"
+        android:background="@drawable/roundede_edittext"
+        app:layout_constraintEnd_toEndOf="@+id/personPhone"
+        app:layout_constraintStart_toStartOf="@+id/personPhone"
+        app:layout_constraintTop_toBottomOf="@+id/personPhone" />
+
+    <RadioGroup
+        android:id="@+id/ownedOrrented"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/personFlat"
+        app:layout_constraintStart_toStartOf="@+id/personFlat"
+        app:layout_constraintTop_toBottomOf="@+id/personFlat">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:text="Owner"
+            android:textColor="@color/black"
+            android:id="@+id/radioButton"
+            android:layout_gravity="center_horizontal"
+            android:checked="false"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="22dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:text="Tenant"
+            android:textColor="@color/black"
+            android:id="@+id/radioButton2"
+            android:layout_gravity="center_horizontal"
+            android:checked="false"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="22dp"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roundede_edittext"
+        android:ems="10"
+        android:hint="Vehicle No"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/common_border_color"
+        app:layout_constraintStart_toStartOf="@+id/personFlat"
+        app:layout_constraintTop_toBottomOf="@+id/ownedOrrented" />
+
+    <Button
+        android:id="@+id/vehicleNumberAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto_regular"
+        android:background="#0D69AA"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@+id/personFlat"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/ownedOrrented" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/register_border"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textSize="22dp"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/vehicleNumberAddButton"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3" />
+
+    <EditText
+        android:id="@+id/passwordReg"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:background="@drawable/roundede_edittext"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/common_border_color"
+        app:layout_constraintEnd_toEndOf="@+id/vehicleNumberAddButton"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+
+    <EditText
+        android:id="@+id/confirmPasswordReg"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:background="@drawable/roundede_edittext"
+        android:hint="Confirm Password"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/common_border_color"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordReg"
+        app:layout_constraintStart_toStartOf="@+id/passwordReg"
+        app:layout_constraintTop_toBottomOf="@+id/passwordReg" />
+</androidx.constraintlayout.widget.ConstraintLayout>
