@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#f7f7f7"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f7f7f7">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <EditText
         android:id="@+id/personName"
@@ -42,6 +44,21 @@
         app:layout_constraintEnd_toEndOf="@+id/personName"
         app:layout_constraintStart_toStartOf="@+id/personName"
         app:layout_constraintTop_toBottomOf="@+id/personName" />
+    <EditText
+        android:id="@+id/personSecondaryPhone"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Secondary Phone(Optional)"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:inputType="phone"
+        android:textColorHint="@color/common_border_color"
+        android:background="@drawable/roundede_edittext"
+        app:layout_constraintEnd_toEndOf="@+id/personPhone"
+        app:layout_constraintStart_toStartOf="@+id/personPhone"
+        app:layout_constraintTop_toBottomOf="@+id/personPhone" />
 
     <EditText
         android:id="@+id/personFlat"
@@ -55,9 +72,9 @@
         android:paddingRight="10dp"
         android:textColorHint="@color/common_border_color"
         android:background="@drawable/roundede_edittext"
-        app:layout_constraintEnd_toEndOf="@+id/personPhone"
-        app:layout_constraintStart_toStartOf="@+id/personPhone"
-        app:layout_constraintTop_toBottomOf="@+id/personPhone" />
+        app:layout_constraintEnd_toEndOf="@+id/personSecondaryPhone"
+        app:layout_constraintStart_toStartOf="@+id/personSecondaryPhone"
+        app:layout_constraintTop_toBottomOf="@+id/personSecondaryPhone" />
 
     <RadioGroup
         android:id="@+id/ownedOrrented"
@@ -92,7 +109,7 @@
     </RadioGroup>
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/vehicleNumbers"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -120,25 +137,37 @@
         android:background="#0D69AA"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="@+id/personFlat"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
+        app:layout_constraintStart_toEndOf="@+id/vehicleNumbers"
         app:layout_constraintTop_toBottomOf="@+id/ownedOrrented" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/vehicleNumbersChipView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:chipSpacingHorizontal="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/vehicleNumberAddButton"
+        app:layout_constraintStart_toStartOf="@+id/vehicleNumbers"
+        app:layout_constraintTop_toBottomOf="@+id/vehicleNumbers"></com.google.android.material.chip.ChipGroup>
 
     <Button
         android:id="@+id/register"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/register_border"
         android:fontFamily="@font/roboto_regular"
         android:text="Register"
         android:textAllCaps="false"
-        android:textSize="22dp"
         android:textColor="@color/white"
+        android:textSize="22dp"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/vehicleNumberAddButton"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintEnd_toEndOf="@+id/confirmPasswordReg"
+        app:layout_constraintStart_toStartOf="@+id/confirmPasswordReg"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordReg" />
 
     <EditText
         android:id="@+id/passwordReg"
@@ -152,9 +181,9 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColorHint="@color/common_border_color"
-        app:layout_constraintEnd_toEndOf="@+id/vehicleNumberAddButton"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintEnd_toEndOf="@+id/vehicleNumbersChipView"
+        app:layout_constraintStart_toStartOf="@+id/vehicleNumbersChipView"
+        app:layout_constraintTop_toBottomOf="@+id/vehicleNumbersChipView" />
 
     <EditText
         android:id="@+id/confirmPasswordReg"
@@ -172,3 +201,4 @@
         app:layout_constraintStart_toStartOf="@+id/passwordReg"
         app:layout_constraintTop_toBottomOf="@+id/passwordReg" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
