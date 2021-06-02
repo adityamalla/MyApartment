@@ -17,14 +17,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Base64;
 
 
@@ -126,31 +132,59 @@ public class RegistrationActivity extends AppCompatActivity {
                         //System.out.println("Decoded string: "+dStr);
                     Log.e("testClick1>>",name+"--"+phone+"--"+pwd);
                     if(name.trim().length()==0){
-                        Toast.makeText(getApplicationContext(),"Please Enter Name",Toast.LENGTH_SHORT).show();
+                        personName.setError("Please Enter Name");
+                        personName.requestFocus();
                     }else if(phone.trim().length()<10){
-                        Toast.makeText(getApplicationContext(),"Phone Number should be 10 digits",Toast.LENGTH_SHORT).show();
+                        personPhone.setError("Phone Number should be 10 digits");
+                        personPhone.requestFocus();
                     }else if(secondaryPhone.trim().length()<10){
-                        Toast.makeText(getApplicationContext(),"Phone Number should be 10 digits",Toast.LENGTH_SHORT).show();
+                        personSecondaryPhone.setError("Phone Number should be 10 digits");
+                        personSecondaryPhone.requestFocus();
                     }else if(flat.trim().length()==0){
-                        Toast.makeText(getApplicationContext(),"Please enter flat details",Toast.LENGTH_SHORT).show();
+                        flatNo.setError("Please enter flat no");
+                        flatNo.requestFocus();
                     }else if(owner.trim().length()==0){
                         Toast.makeText(getApplicationContext(),"Please select either Owner or Tenant",Toast.LENGTH_SHORT).show();
                     }else if(!password.getText().toString().equals(confrmPwd)){
-                        Toast.makeText(getApplicationContext(),"Both Passwords should match",Toast.LENGTH_SHORT).show();
+                        confirmPassword.setError("Both Passwords should match");
+                        confirmPassword.requestFocus();
                     }else{
+                        personName.setError(null);
+                        personPhone.setError(null);
+                        personSecondaryPhone.setError(null);
+                        flatNo.setError(null);
+                        confirmPassword.setError(null);
                         user = new User(name,phone,secondaryPhone,flat,pwd,vehicleNos,owner);
-                        databaseReference.child(phone).setValue(user);
-                        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(RegistrationActivity.this);
-                        dlgAlert.setMessage("Registration Successful!! Redirecting to Login Page");
-                        dlgAlert.setPositiveButton("Ok",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        final Intent myIntent = new Intent(RegistrationActivity.this,
-                                                MainActivity.class);
-                                        startActivity(myIntent);
-                                    }
-                                });
-                        dlgAlert.create().show();
+                        Query checkUser = databaseReference.orderByChild("phone").equalTo(phone);
+                        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    personPhone.setError("This phone number is already registered");
+                                    personPhone.requestFocus();
+                                }else{
+                                    personPhone.setError(null);
+                                    databaseReference.child(phone).setValue(user);
+                                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(RegistrationActivity.this);
+                                    dlgAlert.setMessage("Registration Successful!! Redirecting to Login Page");
+                                    dlgAlert.setPositiveButton("Ok",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    final Intent myIntent = new Intent(RegistrationActivity.this,
+                                                            MainActivity.class);
+                                                    startActivity(myIntent);
+                                                }
+                                            });
+                                    dlgAlert.create().show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }catch (Exception e){
                     e.printStackTrace();
